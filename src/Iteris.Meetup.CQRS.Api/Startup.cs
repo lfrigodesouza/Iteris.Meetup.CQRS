@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace Iteris.Meetup.CQRS.Api
@@ -26,12 +22,19 @@ namespace Iteris.Meetup.CQRS.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Iteris.Meetup.CQRS.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Iteris.Meetup.CQRS.Api", Version = "v1"});
             });
+
+            var currentAssembly = Assembly.GetExecutingAssembly();
+            services.AddMediatR(currentAssembly);
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailFastRequestBehavior<,>));
+
+            AssemblyScanner.FindValidatorsInAssembly(currentAssembly)
+                .ForEach(v => services.AddScoped(v.InterfaceType, v.ValidatorType));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,10 +53,7 @@ namespace Iteris.Meetup.CQRS.Api
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
