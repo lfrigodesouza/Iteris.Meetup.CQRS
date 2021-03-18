@@ -31,7 +31,6 @@ namespace Iteris.Meetup.Domain.Responses
             return response;
         }
 
-
         public static Response Ok()
         {
             var response = new Response();
