@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Iteris.Meetup.CQRS.Command\Iteris.Meetup.CQRS.Command.csproj" />
+    <ProjectReference Include="..\Iteris.Meetup.CQRS.Query\Iteris.Meetup.CQRS.Query.csproj" />
   </ItemGroup>
 
 </Project>

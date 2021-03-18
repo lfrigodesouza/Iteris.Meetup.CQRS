@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using FluentValidation;
 using MediatR;
@@ -28,13 +29,15 @@ namespace Iteris.Meetup.CQRS.Api
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Iteris.Meetup.CQRS.Api", Version = "v1"});
             });
 
-            var currentAssembly = Assembly.GetExecutingAssembly();
-            services.AddMediatR(currentAssembly);
+
+            var assemblies = new[]
+                {Assembly.Load("Iteris.Meetup.CQRS.Command"), Assembly.Load("Iteris.Meetup.CQRS.Query")};
+            services.AddMediatR(assemblies);
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggerBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailFastRequestBehavior<,>));
 
-            AssemblyScanner.FindValidatorsInAssembly(currentAssembly)
+            AssemblyScanner.FindValidatorsInAssemblies(assemblies)
                 .ForEach(v => services.AddScoped(v.InterfaceType, v.ValidatorType));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

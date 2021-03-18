@@ -3,15 +3,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Command.Commands;
 using Iteris.Meetup.Domain.Entities;
+using Iteris.Meetup.Domain.Responses;
 using MediatR;
 
 namespace Iteris.Meetup.CQRS.Command.Handlers
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Response>
     {
-        public Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Response.Ok();
         }
     }
 }
