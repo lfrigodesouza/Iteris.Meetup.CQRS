@@ -7,13 +7,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.5.2" />
     <PackageReference Include="MediatR" Version="9.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Queries\" />
-    <Folder Include="Responses\" />
-    <Folder Include="Validators\" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

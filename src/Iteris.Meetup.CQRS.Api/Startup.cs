@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
 using FluentValidation;
+using Iteris.Meetup.CQRS.Data.Repositories;
+using Iteris.Meetup.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +40,9 @@ namespace Iteris.Meetup.CQRS.Api
 
             AssemblyScanner.FindValidatorsInAssemblies(assemblies)
                 .ForEach(v => services.AddScoped(v.InterfaceType, v.ValidatorType));
+
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

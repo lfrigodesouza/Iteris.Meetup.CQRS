@@ -1,16 +1,12 @@
-﻿using System;
-using Iteris.Meetup.Domain.Responses;
+﻿using Iteris.Meetup.Domain.Responses;
 using MediatR;
 
 namespace Iteris.Meetup.CQRS.Command.Commands
 {
-    public class CreateUserCommand : IRequest<Response>
+    public class CreateAddressCommand : IRequest<Response>
     {
         public string Name { get; set; }
-        public string Surname { get; set; }
-        public DateTime Birthday { get; set; }
-        public string Cpf { get; set; }
-        public string AddressName { get; set; }
+        public int UserId { get; set; }
         public string StreetName { get; set; }
         public int StreetNumber { get; set; }
         public string Complement { get; set; }

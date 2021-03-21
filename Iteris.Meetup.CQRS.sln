@@ -14,8 +14,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{72BC6F35-4A39-4EE0-A26A-5D56DF3AEADF}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		data.db = data.db
 		README.md = README.md
-		sales.db = sales.db
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iteris.Meetup.CQRS.Command", "src\Iteris.Meetup.CQRS.Command\Iteris.Meetup.CQRS.Command.csproj", "{DEFE5FFB-BDC7-42F0-A682-D0807220E9FA}"
@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iteris.Meetup.CQRS.Query", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iteris.Meetup.CQRS.Data", "src\Iteris.Meetup.CQRS.Data\Iteris.Meetup.CQRS.Data.csproj", "{D3EEC087-92A4-44D0-945C-88C387260AF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iteris.Meetup.Domain", "Iteris.Meetup.Domain\Iteris.Meetup.Domain.csproj", "{9473F26A-320A-4EA4-8759-D1891F9D5C0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iteris.Meetup.Domain", "Iteris.Meetup.Domain\Iteris.Meetup.Domain.csproj", "{9473F26A-320A-4EA4-8759-D1891F9D5C0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
