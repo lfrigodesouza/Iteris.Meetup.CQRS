@@ -1,4 +1,4 @@
-﻿namespace Iteris.Meetup.Domain.Enums
+﻿namespace Iteris.Meetup.CQRS.Domain.Aggregates.Subscription
 {
     public enum SubscriptionType : byte
     {

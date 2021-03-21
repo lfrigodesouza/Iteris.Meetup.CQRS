@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Queries\" />
+    <Folder Include="Commands\ToogleProductActivation\" />
+    <Folder Include="Queries\CustomerProductsQuery\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.5.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
   </ItemGroup>
 
 </Project>

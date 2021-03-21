@@ -36,6 +36,9 @@ namespace Iteris.Meetup.CQRS.Api
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggerBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailFastRequestBehavior<,>));
 
+            //TODO - Add InMemoryCache
+            //TODO - Preload InMemoryCache
+
             AssemblyScanner.FindValidatorsInAssemblies(assemblies)
                 .ForEach(v => services.AddScoped(v.InterfaceType, v.ValidatorType));
         }

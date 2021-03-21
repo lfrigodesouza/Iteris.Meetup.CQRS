@@ -16,7 +16,7 @@ namespace Iteris.Meetup.CQRS.Domain.Aggregates.Subscription
 
         public static Subscription DefaultEntity() => new Subscription();
 
-        public Subscription(string customerId, int courseId)
+        public Subscription(string customerId, int productId, SubscriptionType subscriptionType)
         {
             CustomerId = customerId;
             CourseId = courseId;
@@ -24,7 +24,8 @@ namespace Iteris.Meetup.CQRS.Domain.Aggregates.Subscription
         }
 
         public string CustomerId { get; set; }
-        public int CourseId { get; set; }
+        public int ProductId { get; set; }
+        public SubscriptionType SubscriptionType { get; set; }
 
     }
 }
