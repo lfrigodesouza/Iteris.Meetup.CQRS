@@ -1,6 +1,4 @@
 ﻿using System;
-using Iteris.Meetup.Domain.Entities;
-using Iteris.Meetup.Domain.Interfaces.Repositories;
 
 namespace Iteris.Meetup.CQRS.Data.Repositories
 {
