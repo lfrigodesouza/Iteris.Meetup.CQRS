@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Command.Commands;
@@ -11,11 +12,11 @@ namespace Iteris.Meetup.CQRS.Api.Controllers
 {
     [ApiController]
     [Route("/")]
-    public class HomeController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public HomeController(IMediator mediator)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -46,6 +47,7 @@ namespace Iteris.Meetup.CQRS.Api.Controllers
 
         [HttpGet("address/{userId}")]
         [ProducesResponseType(typeof(UserAddressesResponse), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(void), (int) HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(List<string>), (int) HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(List<string>), (int) HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetAddresses([FromRoute] int userId)
