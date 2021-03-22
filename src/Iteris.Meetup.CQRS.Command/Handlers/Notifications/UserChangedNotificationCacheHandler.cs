@@ -1,6 +1,8 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Command.Notifications;
+using Iteris.Meetup.Domain.Entities;
 using Iteris.Meetup.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -25,9 +27,22 @@ namespace Iteris.Meetup.CQRS.Command.Handlers.Notifications
         public async Task Handle(UserChangedNotification notification, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"Atualizando cache de endereços do usuário {notification.UserId}");
-            var userAddresses = await _addressRepository.GetByUserId(notification.UserId);
+            var addresses = await _addressRepository.GetByUserId(notification.UserId);
 
-            await _cacheDbRepository.AddItemToCache(notification.UserId.ToString(), userAddresses);
+            var userAddresses = addresses.Select(address => new UserAddress
+                                         {
+                                             Name = address.Name,
+                                             Cep = address.Cep,
+                                             City = address.City,
+                                             State = address.State,
+                                             Street = $"{address.StreetName}, {address.StreetNumber}" +
+                                                      (string.IsNullOrWhiteSpace(address.Complement)
+                                                          ? string.Empty
+                                                          : $", {address.Complement}")
+                                         })
+                                         .ToList();
+
+            _cacheDbRepository.AddItemToCache(notification.UserId.ToString(), userAddresses);
         }
     }
 }

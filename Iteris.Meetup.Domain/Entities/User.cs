@@ -17,11 +17,5 @@ namespace Iteris.Meetup.Domain.Entities
         public string Surname { get; set; }
         public DateTime Birthday { get; set; }
         public string Cpf { get; set; }
-        public int Age => DateTime.Now.Year - Birthday.Year;
-
-        public override string ToString()
-        {
-            return $"{Name} {Surname}";
-        }
     }
 }

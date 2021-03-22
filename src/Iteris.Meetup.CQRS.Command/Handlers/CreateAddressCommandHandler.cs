@@ -34,12 +34,11 @@ namespace Iteris.Meetup.CQRS.Command.Handlers
             {
                 var address = new Address(request.UserId, request.StreetName, request.StreetNumber, request.Complement,
                     request.Cep, request.City, request.State, request.Name);
-                var addressId = await _addressRepository.Create(address);
+                await _addressRepository.Create(address);
 
                 var notification = new UserChangedNotification(request.UserId, ChangeTypeEnum.UpdatedItem);
                 await _mediator.Publish(notification, cancellationToken);
 
-                _logger.LogInformation("Endereço cadastrado com sucesso");
                 return Response.Ok(HttpStatusCode.Created);
             }
             catch (Exception ex)

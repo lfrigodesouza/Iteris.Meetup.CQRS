@@ -14,5 +14,17 @@
         @birthday,
         @cpf);
         ";
+
+        public static string GetById => @"
+        SELECT
+            ID as Id
+            , NAME as Name
+            , SURNAME as Surname
+            , BIRTHDAY as Birthday
+            , CPF as Cpf
+        FROM
+            USER
+        WHERE
+            ID = @userId ";
     }
 }

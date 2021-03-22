@@ -7,7 +7,7 @@ using FluentValidation;
 using Iteris.Meetup.Domain.Responses;
 using MediatR;
 
-namespace Iteris.Meetup.CQRS.Api
+namespace Iteris.Meetup.CQRS.Api.Behaviors
 {
     public class FailFastRequestBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TResponse : Response

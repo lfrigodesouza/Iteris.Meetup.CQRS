@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Iteris.Meetup.CQRS.Api
+namespace Iteris.Meetup.CQRS.Api.Behaviors
 {
     public class LoggerBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

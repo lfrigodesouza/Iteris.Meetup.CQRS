@@ -5,7 +5,6 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Query.Queries;
-using Iteris.Meetup.CQRS.Query.Responses;
 using Iteris.Meetup.Domain.Entities;
 using Iteris.Meetup.Domain.Interfaces.Repositories;
 using Iteris.Meetup.Domain.Responses;
@@ -30,24 +29,11 @@ namespace Iteris.Meetup.CQRS.Query.Handlers
         {
             try
             {
-                var addresses = await _cacheDbRepository.GetItemFromCache<List<Address>>(request.UserId.ToString());
-                if (addresses == null || !addresses.Any())
-                    return Response.Fail(HttpStatusCode.NoContent);
+                var userAddresses = _cacheDbRepository.GetItemFromCache<List<UserAddress>>(request.UserId.ToString());
+                if (userAddresses == null || !userAddresses.Any())
+                    return Response.Ok(HttpStatusCode.NoContent);
 
-                var response = new UserAddressesResponse();
-
-                response.Addresses.AddRange(addresses.Select(a => new UserAddress
-                {
-                    Name = a.Name,
-                    Cep = a.Cep,
-                    City = a.City,
-                    State = a.State,
-                    Street = $"{a.StreetName}, {a.StreetNumber}" + (string.IsNullOrWhiteSpace(a.Complement)
-                        ? string.Empty
-                        : $", {a.Complement}")
-                }));
-
-                return Response.Ok(response);
+                return Response.Ok(userAddresses);
             }
             catch (Exception ex)
             {

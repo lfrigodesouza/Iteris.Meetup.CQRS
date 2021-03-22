@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using Iteris.Meetup.CQRS.Query.Responses;
+using Iteris.Meetup.Domain.Entities;
+using Iteris.Meetup.Domain.Responses;
 
 namespace Iteris.Meetup.CQRS.Test.Fakes
 {
     public static class UserAddressesFake
     {
-        public static UserAddressesResponse ValidAddresses()
+        public static List<UserAddress> ValidAddresses()
         {
-            var response = new UserAddressesResponse();
-            response.Addresses.AddRange(
+            var response = new List<UserAddress>();
+            response.AddRange(
                 new List<UserAddress>
                 {
                     new()

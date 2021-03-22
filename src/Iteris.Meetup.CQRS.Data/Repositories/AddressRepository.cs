@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,14 +28,15 @@ namespace Iteris.Meetup.CQRS.Data.Repositories
                     state = address.State,
                     name = address.Name
                 });
-            var addressId = await conn.QueryFirstOrDefaultAsync<int>("SELECT last_insert_rowid() FROM ADDRESS");
-
-            return addressId;
+            return await conn.QueryFirstOrDefaultAsync<int>("SELECT last_insert_rowid() FROM ADDRESS");
         }
 
-        public Task<Address> GetById(int addressId)
+        public async Task<Address> GetById(int addressId)
         {
-            throw new NotImplementedException();
+            await using var conn = new SQLiteConnection(ConnString);
+            conn.Open();
+
+            return await conn.QueryFirstOrDefaultAsync<Address>(AddressStatements.GetById, new {addressId});
         }
 
         public async Task<List<Address>> GetByUserId(int userId)

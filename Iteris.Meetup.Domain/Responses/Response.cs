@@ -15,6 +15,7 @@ namespace Iteris.Meetup.Domain.Responses
         public List<string> ErrorMessages { get; }
         public int StatusCode { get; private set; }
         public bool IsFailure => ErrorMessages.Any();
+        public object GetResponse => IsFailure ? ErrorMessages : Content;
 
         public static Response Fail(HttpStatusCode statusCode, string errorMessage)
         {

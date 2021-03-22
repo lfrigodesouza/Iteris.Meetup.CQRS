@@ -39,14 +39,13 @@ namespace Iteris.Meetup.CQRS.Command.Handlers
                 var userId = await _userRepository.Create(newUser);
 
                 var address = new Address(userId, request.StreetName, request.StreetNumber, request.Complement,
-                    request.Cep, request.City, request.State, request.StreetName);
+                    request.Cep, request.City, request.State, request.AddressName);
                 await _addressRepository.Create(address);
 
                 var notification = new UserChangedNotification(userId, ChangeTypeEnum.NewItem);
                 await _mediator.Publish(notification, cancellationToken);
 
-                _logger.LogInformation("Usuário cadastrado com sucesso");
-                return Response.Ok(HttpStatusCode.Created);
+                return Response.Ok(HttpStatusCode.Created, userId);
             }
             catch (Exception ex)
             {

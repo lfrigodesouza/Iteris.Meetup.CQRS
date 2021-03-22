@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.Threading.Tasks;
 using Dapper;
 using Iteris.Meetup.CQRS.Data.Statements;
@@ -17,14 +16,15 @@ namespace Iteris.Meetup.CQRS.Data.Repositories
 
             await conn.ExecuteAsync(UserStatements.CreateUser,
                 new {name = user.Name, surname = user.Surname, birthday = user.Birthday, cpf = user.Cpf});
-            var userId = await conn.QueryFirstOrDefaultAsync<int>("SELECT last_insert_rowid() FROM USER");
-
-            return userId;
+            return await conn.QueryFirstOrDefaultAsync<int>("SELECT last_insert_rowid() FROM USER");
         }
 
-        Task<User> IUserRepository.GetById(int userId)
+        public async Task<User> GetById(int userId)
         {
-            throw new NotImplementedException();
+            await using var conn = new SQLiteConnection(ConnString);
+            conn.Open();
+
+            return await conn.QueryFirstOrDefaultAsync<User>(UserStatements.GetById, new {userId});
         }
     }
 }

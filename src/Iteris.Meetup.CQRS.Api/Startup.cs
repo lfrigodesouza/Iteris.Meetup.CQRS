@@ -1,6 +1,6 @@
-using System;
 using System.Reflection;
 using FluentValidation;
+using Iteris.Meetup.CQRS.Api.Behaviors;
 using Iteris.Meetup.CQRS.Data.Repositories;
 using Iteris.Meetup.Domain.Interfaces.Repositories;
 using MediatR;
@@ -39,7 +39,7 @@ namespace Iteris.Meetup.CQRS.Api
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailFastRequestBehavior<,>));
 
             AssemblyScanner.FindValidatorsInAssemblies(assemblies)
-                .ForEach(v => services.AddScoped(v.InterfaceType, v.ValidatorType));
+                           .ForEach(v => services.AddScoped(v.InterfaceType, v.ValidatorType));
 
             services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<IUserRepository, UserRepository>();

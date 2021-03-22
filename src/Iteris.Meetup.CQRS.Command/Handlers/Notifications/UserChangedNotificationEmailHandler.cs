@@ -16,7 +16,7 @@ namespace Iteris.Meetup.CQRS.Command.Handlers.Notifications
             _logger = logger;
         }
 
-        public async Task Handle(UserChangedNotification notification, CancellationToken cancellationToken)
+        public Task Handle(UserChangedNotification notification, CancellationToken cancellationToken)
         {
             _logger.LogInformation(
                 $"UserID: {notification.UserId} | DtChanged: {notification.DtChanged}");
@@ -30,6 +30,7 @@ namespace Iteris.Meetup.CQRS.Command.Handlers.Notifications
                     _logger.LogInformation("Seu cadastro foi realizado com sucesso!");
                     break;
             }
+            return Task.CompletedTask;
         }
     }
 }
