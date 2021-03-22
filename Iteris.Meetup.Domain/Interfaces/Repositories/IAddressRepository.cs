@@ -8,6 +8,6 @@ namespace Iteris.Meetup.Domain.Interfaces.Repositories
     {
         Task<int> Create(Address address);
         Task<Address> GetById(int addressId);
-        Task<IEnumerable<Address>> GetByUserId(int userId);
+        Task<List<Address>> GetByUserId(int userId);
     }
 }

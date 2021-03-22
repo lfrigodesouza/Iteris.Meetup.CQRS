@@ -15,7 +15,8 @@ namespace Iteris.Meetup.CQRS.Api
             _logger = logger;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+        public async Task<TResponse> Handle(TRequest request,
+            CancellationToken cancellationToken,
             RequestHandlerDelegate<TResponse> next)
         {
             _logger.LogInformation(

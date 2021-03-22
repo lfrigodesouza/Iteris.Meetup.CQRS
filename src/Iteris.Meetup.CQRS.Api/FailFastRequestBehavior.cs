@@ -19,13 +19,14 @@ namespace Iteris.Meetup.CQRS.Api
             _validators = validators;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+        public async Task<TResponse> Handle(TRequest request,
+            CancellationToken cancellationToken,
             RequestHandlerDelegate<TResponse> next)
         {
             var failures = _validators.Select(v => v.Validate(request))
-                .SelectMany(r => r.Errors)
-                .Where(e => e is not null)
-                .ToList();
+                                      .SelectMany(r => r.Errors)
+                                      .Where(e => e is not null)
+                                      .ToList();
 
             if (failures.Any())
                 return (TResponse) Response.Fail(HttpStatusCode.BadRequest,

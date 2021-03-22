@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Command.Commands;
 using Iteris.Meetup.CQRS.Command.Notifications;
 using Iteris.Meetup.Domain.Entities;
+using Iteris.Meetup.Domain.Enums;
 using Iteris.Meetup.Domain.Interfaces.Repositories;
 using Iteris.Meetup.Domain.Responses;
 using MediatR;
@@ -18,7 +19,8 @@ namespace Iteris.Meetup.CQRS.Command.Handlers
         private readonly ILogger<CreateAddressCommandHandler> _logger;
         private readonly IMediator _mediator;
 
-        public CreateAddressCommandHandler(ILogger<CreateAddressCommandHandler> logger, IMediator mediator,
+        public CreateAddressCommandHandler(ILogger<CreateAddressCommandHandler> logger,
+            IMediator mediator,
             IAddressRepository addressRepository)
         {
             _logger = logger;
@@ -34,11 +36,11 @@ namespace Iteris.Meetup.CQRS.Command.Handlers
                     request.Cep, request.City, request.State, request.Name);
                 var addressId = await _addressRepository.Create(address);
 
-                var notification = new NewAddressNotification(request.UserId, addressId);
+                var notification = new UserChangedNotification(request.UserId, ChangeTypeEnum.UpdatedItem);
                 await _mediator.Publish(notification, cancellationToken);
 
                 _logger.LogInformation("Endereço cadastrado com sucesso");
-                return Response.Ok();
+                return Response.Ok(HttpStatusCode.Created);
             }
             catch (Exception ex)
             {

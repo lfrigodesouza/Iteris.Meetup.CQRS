@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Query.Queries;
 using Iteris.Meetup.CQRS.Query.Responses;
+using Iteris.Meetup.Domain.Entities;
 using Iteris.Meetup.Domain.Interfaces.Repositories;
 using Iteris.Meetup.Domain.Responses;
 using MediatR;
@@ -12,24 +14,24 @@ using Microsoft.Extensions.Logging;
 
 namespace Iteris.Meetup.CQRS.Query.Handlers
 {
-    public class UserAddressesQueryhandler : IRequestHandler<UserAddressesQuery, Response>
+    public class UserAddressesQueryHandler : IRequestHandler<UserAddressesQuery, Response>
     {
-        private readonly IAddressRepository _addressRepository;
+        private readonly ICacheDbRepository _cacheDbRepository;
         private readonly ILogger<UserAddressesQuery> _logger;
 
-        public UserAddressesQueryhandler(ILogger<UserAddressesQuery> logger, IAddressRepository addressRepository)
+        public UserAddressesQueryHandler(ILogger<UserAddressesQuery> logger,
+            ICacheDbRepository cacheDbRepository)
         {
             _logger = logger;
-            _addressRepository = addressRepository;
+            _cacheDbRepository = cacheDbRepository;
         }
 
         public async Task<Response> Handle(UserAddressesQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                var addresses = await _addressRepository.GetByUserId(request.UserId);
-
-                if (!addresses.Any())
+                var addresses = await _cacheDbRepository.GetItemFromCache<List<Address>>(request.UserId.ToString());
+                if (addresses == null || !addresses.Any())
                     return Response.Fail(HttpStatusCode.NoContent);
 
                 var response = new UserAddressesResponse();

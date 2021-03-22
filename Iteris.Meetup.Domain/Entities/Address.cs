@@ -4,8 +4,14 @@
     {
         public Address() { }
 
-        public Address(int userId, string streetName, int streetNumber, string complement, string cep, string city,
-            string state, string name)
+        public Address(int userId,
+            string streetName,
+            int streetNumber,
+            string complement,
+            string cep,
+            string city,
+            string state,
+            string name)
         {
             UserId = userId;
             StreetName = streetName;

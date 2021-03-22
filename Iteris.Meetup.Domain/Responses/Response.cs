@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text.Json;
 
 namespace Iteris.Meetup.Domain.Responses
 {
@@ -24,23 +23,29 @@ namespace Iteris.Meetup.Domain.Responses
 
         public static Response Fail(HttpStatusCode statusCode, params string[] errorMessages)
         {
-            var response = new Response();
-            response.StatusCode = (int) statusCode;
+            var response = new Response {StatusCode = (int) statusCode};
             response.ErrorMessages.AddRange(errorMessages.ToList());
             return response;
         }
 
         public static Response Ok()
         {
-            var response = new Response();
-            response.Content = string.Empty;
-            return response;
+            return Ok(HttpStatusCode.OK, string.Empty);
+        }
+
+        public static Response Ok(HttpStatusCode statusCode)
+        {
+            return Ok(statusCode, string.Empty);
         }
 
         public static Response Ok(object content)
         {
-            var response = new Response();
-            response.Content = content;
+            return Ok(HttpStatusCode.OK, content);
+        }
+
+        public static Response Ok(HttpStatusCode statusCode, object content)
+        {
+            var response = new Response {Content = content, StatusCode = (int) statusCode};
             return response;
         }
     }

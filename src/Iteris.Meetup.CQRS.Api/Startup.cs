@@ -30,7 +30,7 @@ namespace Iteris.Meetup.CQRS.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Iteris.Meetup.CQRS.Api", Version = "v1"});
             });
-
+            services.AddMemoryCache();
 
             var assemblies = new[]
                 {Assembly.Load("Iteris.Meetup.CQRS.Command"), Assembly.Load("Iteris.Meetup.CQRS.Query")};
@@ -43,6 +43,7 @@ namespace Iteris.Meetup.CQRS.Api
 
             services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddSingleton<ICacheDbRepository, CacheDbRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

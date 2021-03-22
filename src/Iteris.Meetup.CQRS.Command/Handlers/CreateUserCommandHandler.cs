@@ -3,7 +3,9 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Command.Commands;
+using Iteris.Meetup.CQRS.Command.Notifications;
 using Iteris.Meetup.Domain.Entities;
+using Iteris.Meetup.Domain.Enums;
 using Iteris.Meetup.Domain.Interfaces.Repositories;
 using Iteris.Meetup.Domain.Responses;
 using MediatR;
@@ -15,14 +17,18 @@ namespace Iteris.Meetup.CQRS.Command.Handlers
     {
         private readonly IAddressRepository _addressRepository;
         private readonly ILogger<CreateUserCommand> _logger;
+        private readonly IMediator _mediator;
         private readonly IUserRepository _userRepository;
 
-        public CreateUserCommandHandler(ILogger<CreateUserCommand> logger, IUserRepository userRepository,
-            IAddressRepository addressRepository)
+        public CreateUserCommandHandler(ILogger<CreateUserCommand> logger,
+            IUserRepository userRepository,
+            IAddressRepository addressRepository,
+            IMediator mediator)
         {
             _logger = logger;
             _userRepository = userRepository;
             _addressRepository = addressRepository;
+            _mediator = mediator;
         }
 
         public async Task<Response> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -36,8 +42,11 @@ namespace Iteris.Meetup.CQRS.Command.Handlers
                     request.Cep, request.City, request.State, request.StreetName);
                 await _addressRepository.Create(address);
 
+                var notification = new UserChangedNotification(userId, ChangeTypeEnum.NewItem);
+                await _mediator.Publish(notification, cancellationToken);
+
                 _logger.LogInformation("Usuário cadastrado com sucesso");
-                return Response.Ok();
+                return Response.Ok(HttpStatusCode.Created);
             }
             catch (Exception ex)
             {
