@@ -1,8 +1,8 @@
-﻿using Iteris.Meetup.CQRS.Domain.Aggregates.UserAggregate;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Iteris.Meetup.CQRS.Domain.Aggregates.UserAggregate;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Iteris.Meetup.CQRS.Application.Commands.CreateUser
 {

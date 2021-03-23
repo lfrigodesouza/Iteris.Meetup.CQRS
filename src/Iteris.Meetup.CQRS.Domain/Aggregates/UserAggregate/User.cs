@@ -1,5 +1,5 @@
-﻿using Iteris.Meetup.CQRS.Domain.SeedWorks;
-using System;
+﻿using System;
+using Iteris.Meetup.CQRS.Domain.SeedWorks;
 
 namespace Iteris.Meetup.CQRS.Domain.Aggregates.UserAggregate
 {

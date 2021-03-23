@@ -4,7 +4,9 @@ namespace Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate
 {
     public class Address : Entity
     {
-        public Address() { }
+        public Address()
+        {
+        }
 
         public Address(int userId,
             string streetName,

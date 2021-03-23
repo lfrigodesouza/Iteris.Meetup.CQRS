@@ -1,8 +1,8 @@
-﻿using Dapper;
+﻿using System.Data.SQLite;
+using System.Threading.Tasks;
+using Dapper;
 using Iteris.Meetup.CQRS.Data.Statements;
 using Iteris.Meetup.CQRS.Domain.Aggregates.UserAggregate;
-using System.Data.SQLite;
-using System.Threading.Tasks;
 
 namespace Iteris.Meetup.CQRS.Data.Repositories
 {
@@ -14,7 +14,7 @@ namespace Iteris.Meetup.CQRS.Data.Repositories
             conn.Open();
 
             await conn.ExecuteAsync(UserStatements.CreateUser,
-                new { name = user.Name, surname = user.Surname, birthday = user.Birthday, cpf = user.Cpf });
+                new {name = user.Name, surname = user.Surname, birthday = user.Birthday, cpf = user.Cpf});
             return await conn.QueryFirstOrDefaultAsync<int>("SELECT last_insert_rowid() FROM USER");
         }
 
@@ -23,7 +23,7 @@ namespace Iteris.Meetup.CQRS.Data.Repositories
             await using var conn = new SQLiteConnection(ConnString);
             conn.Open();
 
-            return await conn.QueryFirstOrDefaultAsync<User>(UserStatements.GetById, new { userId });
+            return await conn.QueryFirstOrDefaultAsync<User>(UserStatements.GetById, new {userId});
         }
     }
 }

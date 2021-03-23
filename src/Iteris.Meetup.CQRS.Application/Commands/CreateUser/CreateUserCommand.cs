@@ -1,5 +1,5 @@
-﻿using MediatR;
-using System;
+﻿using System;
+using MediatR;
 
 namespace Iteris.Meetup.CQRS.Application.Commands.CreateUser
 {

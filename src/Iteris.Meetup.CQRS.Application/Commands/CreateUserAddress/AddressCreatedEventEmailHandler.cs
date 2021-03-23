@@ -1,9 +1,8 @@
-﻿using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
-using Iteris.Meetup.CQRS.Domain.Aggregates.UserAggregate;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
 {
@@ -22,9 +21,9 @@ namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
                 $"UserID: {notification.Address.UserId} | DtChanged: {notification.DtChanged}");
 
             _logger.LogInformation(
-                        "Usuário, um novo endereço foi cadastrado na sua conta. Se não foi você, clique aqui e verifique suas informações.");
-           
+                "Usuário, um novo endereço foi cadastrado na sua conta. Se não foi você, clique aqui e verifique suas informações.");
+
             return Task.CompletedTask;
         }
-}
+    }
 }

@@ -1,5 +1,4 @@
-﻿using Iteris.Meetup.CQRS.Application;
-using MediatR;
+﻿using MediatR;
 
 namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
 {

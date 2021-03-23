@@ -34,14 +34,13 @@ namespace Iteris.Meetup.CQRS.Api
             });
             services.AddMemoryCache();
 
-            var assemblies = new[]
-                {Assembly.Load("Iteris.Meetup.CQRS.Command"), Assembly.Load("Iteris.Meetup.CQRS.Query")};
-            services.AddMediatR(assemblies);
+            var assembly = Assembly.Load("Iteris.Meetup.CQRS.Application");
+            services.AddMediatR(assembly);
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggerBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(FailFastRequestBehavior<,>));
 
-            AssemblyScanner.FindValidatorsInAssemblies(assemblies)
-                           .ForEach(v => services.AddScoped(v.InterfaceType, v.ValidatorType));
+            AssemblyScanner.FindValidatorsInAssembly(assembly)
+                .ForEach(v => services.AddScoped(v.InterfaceType, v.ValidatorType));
 
             services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<IUserRepository, UserRepository>();

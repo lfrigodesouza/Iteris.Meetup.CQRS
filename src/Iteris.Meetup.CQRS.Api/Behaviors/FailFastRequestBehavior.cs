@@ -1,11 +1,11 @@
-﻿using FluentValidation;
-using Iteris.Meetup.CQRS.Application;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
+using Iteris.Meetup.CQRS.Application;
+using MediatR;
 
 namespace Iteris.Meetup.CQRS.Api.Behaviors
 {
@@ -24,12 +24,12 @@ namespace Iteris.Meetup.CQRS.Api.Behaviors
             RequestHandlerDelegate<TResponse> next)
         {
             var failures = _validators.Select(v => v.Validate(request))
-                                      .SelectMany(r => r.Errors)
-                                      .Where(e => e is not null)
-                                      .ToList();
+                .SelectMany(r => r.Errors)
+                .Where(e => e is not null)
+                .ToList();
 
             if (failures.Any())
-                return (TResponse)Response.Fail(HttpStatusCode.BadRequest,
+                return (TResponse) Response.Fail(HttpStatusCode.BadRequest,
                     failures.Select(x => x.ErrorMessage).ToArray());
 
             return await next();

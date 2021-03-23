@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System.Net;
+using System.Threading.Tasks;
+using FluentAssertions;
 using Iteris.Meetup.CQRS.Api.Controllers;
 using Iteris.Meetup.CQRS.Application;
 using Iteris.Meetup.CQRS.Application.Commands.CreateUser;
@@ -8,8 +10,6 @@ using Iteris.Meetup.CQRS.Test.Fakes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using System.Net;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Iteris.Meetup.CQRS.Test.Controllers
@@ -34,8 +34,8 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<CreateUserCommand>()).Returns(errorResponse);
 
             var response = await _controller.CreateUser(new CreateUserCommand()) as ObjectResult;
-            response.StatusCode.Value.Should().Be((int)statusCode);
-            response.Value.Should().BeEquivalentTo(new[] { $"Generic {statusCode.ToString()} Error message" });
+            response.StatusCode.Value.Should().Be((int) statusCode);
+            response.Value.Should().BeEquivalentTo(new[] {$"Generic {statusCode.ToString()} Error message"});
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<CreateUserCommand>()).Returns(successResponse);
 
             var response = await _controller.CreateUser(new CreateUserCommand()) as ObjectResult;
-            response.StatusCode.Should().Be((int)HttpStatusCode.Created);
+            response.StatusCode.Should().Be((int) HttpStatusCode.Created);
             response.Value.Should().BeEquivalentTo(string.Empty);
         }
 
@@ -58,8 +58,8 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<CreateUserAddressCommand>()).Returns(errorResponse);
 
             var response = await _controller.CreateAddress(new CreateUserAddressCommand()) as ObjectResult;
-            response.StatusCode.Value.Should().Be((int)statusCode);
-            response.Value.Should().BeEquivalentTo(new[] { $"Generic {statusCode.ToString()} Error message" });
+            response.StatusCode.Value.Should().Be((int) statusCode);
+            response.Value.Should().BeEquivalentTo(new[] {$"Generic {statusCode.ToString()} Error message"});
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<CreateUserAddressCommand>()).Returns(successResponse);
 
             var response = await _controller.CreateAddress(new CreateUserAddressCommand()) as ObjectResult;
-            response.StatusCode.Should().Be((int)HttpStatusCode.Created);
+            response.StatusCode.Should().Be((int) HttpStatusCode.Created);
             response.Value.Should().BeEquivalentTo(string.Empty);
         }
 
@@ -82,8 +82,8 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<UserAddressesQuery>()).Returns(errorResponse);
 
             var response = await _controller.GetAddresses(1) as ObjectResult;
-            response.StatusCode.Value.Should().Be((int)statusCode);
-            response.Value.Should().BeEquivalentTo(new[] { $"Generic {statusCode.ToString()} Error message" });
+            response.StatusCode.Value.Should().Be((int) statusCode);
+            response.Value.Should().BeEquivalentTo(new[] {$"Generic {statusCode.ToString()} Error message"});
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<UserAddressesQuery>()).Returns(successResponse);
 
             var response = await _controller.GetAddresses(7) as ObjectResult;
-            response.StatusCode.Should().Be((int)HttpStatusCode.OK);
+            response.StatusCode.Should().Be((int) HttpStatusCode.OK);
             response.Value.Should().BeEquivalentTo(userAddresses);
         }
 
@@ -105,7 +105,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<UserAddressesQuery>()).Returns(successResponse);
 
             var response = await _controller.GetAddresses(7) as ObjectResult;
-            response.StatusCode.Should().Be((int)HttpStatusCode.NoContent);
+            response.StatusCode.Should().Be((int) HttpStatusCode.NoContent);
             response.Value.Should().BeEquivalentTo(string.Empty);
         }
     }

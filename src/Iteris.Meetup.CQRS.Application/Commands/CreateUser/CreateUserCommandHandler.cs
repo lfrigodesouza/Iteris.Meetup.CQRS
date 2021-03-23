@@ -1,11 +1,12 @@
-﻿using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
-using Iteris.Meetup.CQRS.Domain.Aggregates.UserAggregate;
-using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Iteris.Meetup.CQRS.CrossCutting;
+using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
+using Iteris.Meetup.CQRS.Domain.Aggregates.UserAggregate;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Iteris.Meetup.CQRS.Application.Commands.CreateUser
 {
@@ -34,13 +35,13 @@ namespace Iteris.Meetup.CQRS.Application.Commands.CreateUser
                 var newUser = new User(request.Name, request.Surname, request.Birthday, request.Cpf);
                 var userId = await _userRepository.Create(newUser);
 
-                await _mediator.Publish(newUser.DomainEvents, cancellationToken);
+                await _mediator.Dispatch(newUser.DomainEvents, cancellationToken);
 
                 var address = new Address(userId, request.StreetName, request.StreetNumber, request.Complement,
                     request.Cep, request.City, request.State, request.AddressName);
                 await _addressRepository.Create(address);
 
-                await _mediator.Publish(address.DomainEvents, cancellationToken);
+                await _mediator.Dispatch(address.DomainEvents, cancellationToken);
 
                 return Response.Ok(HttpStatusCode.Created, userId);
             }

@@ -1,6 +1,6 @@
-﻿using FluentValidation;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
+using FluentValidation;
 
 namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
 {

@@ -1,13 +1,13 @@
-﻿using Iteris.Meetup.CQRS.Application.Models;
-using Iteris.Meetup.CQRS.Domain.Interfaces.Repositories;
-using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Iteris.Meetup.CQRS.Application.Models;
+using Iteris.Meetup.CQRS.Domain.Interfaces.Repositories;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Iteris.Meetup.CQRS.Application.Queries.UserAdresses
 {

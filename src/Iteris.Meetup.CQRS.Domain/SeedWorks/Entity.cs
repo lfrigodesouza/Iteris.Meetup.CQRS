@@ -1,5 +1,5 @@
-﻿using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MediatR;
 
 namespace Iteris.Meetup.CQRS.Domain.SeedWorks
 {
@@ -11,10 +11,13 @@ namespace Iteris.Meetup.CQRS.Domain.SeedWorks
 
         public void AddDomainEvent(INotification eventItem)
         {
-            _domainEvents = _domainEvents ?? new List<INotification>();
+            _domainEvents ??= new List<INotification>();
             _domainEvents.Add(eventItem);
         }
 
-        public void ClearDomainEvents() => _domainEvents?.Clear();
+        public void ClearDomainEvents()
+        {
+            _domainEvents?.Clear();
+        }
     }
 }

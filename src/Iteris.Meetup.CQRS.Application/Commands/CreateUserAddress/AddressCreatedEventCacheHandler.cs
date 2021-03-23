@@ -1,11 +1,11 @@
-﻿using Iteris.Meetup.CQRS.Application.Models;
+﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Iteris.Meetup.CQRS.Application.Models;
 using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
 using Iteris.Meetup.CQRS.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
 {
@@ -36,9 +36,9 @@ namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
                 City = address.City,
                 State = address.State,
                 Street = $"{address.StreetName}, {address.StreetNumber}" +
-                (string.IsNullOrWhiteSpace(address.Complement)
-                    ? string.Empty
-                    : $", {address.Complement}")
+                         (string.IsNullOrWhiteSpace(address.Complement)
+                             ? string.Empty
+                             : $", {address.Complement}")
             }).ToList();
 
             _cacheDbRepository.AddItemToCache(notification.Address.UserId.ToString(), userAddresses);

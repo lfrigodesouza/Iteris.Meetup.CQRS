@@ -1,10 +1,11 @@
-﻿using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
-using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Iteris.Meetup.CQRS.CrossCutting;
+using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
 {
@@ -31,7 +32,7 @@ namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
                     request.Cep, request.City, request.State, request.Name);
                 await _addressRepository.Create(address);
 
-                await _mediator.Publish(address.DomainEvents, cancellationToken);
+                await _mediator.Dispatch(address.DomainEvents, cancellationToken);
 
                 return Response.Ok(HttpStatusCode.Created);
             }
