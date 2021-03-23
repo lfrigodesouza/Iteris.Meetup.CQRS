@@ -3,5 +3,9 @@
     public class RepositoryBase
     {
         protected const string ConnString = "DataSource=..\\..\\data.db";
+
+        protected RepositoryBase()
+        {
+        }
     }
 }

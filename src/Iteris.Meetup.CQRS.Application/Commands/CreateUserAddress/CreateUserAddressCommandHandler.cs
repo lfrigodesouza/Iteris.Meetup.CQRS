@@ -1,25 +1,20 @@
-﻿using System;
+﻿using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Iteris.Meetup.CQRS.Command.Commands;
-using Iteris.Meetup.CQRS.Command.Notifications;
-using Iteris.Meetup.CQRS.Domain.Entities;
-using Iteris.Meetup.CQRS.Domain.Enums;
-using Iteris.Meetup.CQRS.Domain.Interfaces.Repositories;
-using Iteris.Meetup.CQRS.Domain.Responses;
-using MediatR;
-using Microsoft.Extensions.Logging;
 
-namespace Iteris.Meetup.CQRS.Command.Handlers
+namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
 {
-    public class CreateAddressCommandHandler : IRequestHandler<CreateAddressCommand, Response>
+    public class CreateUserAddressCommandHandler : IRequestHandler<CreateUserAddressCommand, Response>
     {
         private readonly IAddressRepository _addressRepository;
-        private readonly ILogger<CreateAddressCommandHandler> _logger;
+        private readonly ILogger<CreateUserAddressCommandHandler> _logger;
         private readonly IMediator _mediator;
 
-        public CreateAddressCommandHandler(ILogger<CreateAddressCommandHandler> logger,
+        public CreateUserAddressCommandHandler(ILogger<CreateUserAddressCommandHandler> logger,
             IMediator mediator,
             IAddressRepository addressRepository)
         {
@@ -28,7 +23,7 @@ namespace Iteris.Meetup.CQRS.Command.Handlers
             _addressRepository = addressRepository;
         }
 
-        public async Task<Response> Handle(CreateAddressCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(CreateUserAddressCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -36,8 +31,7 @@ namespace Iteris.Meetup.CQRS.Command.Handlers
                     request.Cep, request.City, request.State, request.Name);
                 await _addressRepository.Create(address);
 
-                var notification = new UserChangedNotification(request.UserId, ChangeTypeEnum.UpdatedItem);
-                await _mediator.Publish(notification, cancellationToken);
+                await _mediator.Publish(address.DomainEvents, cancellationToken);
 
                 return Response.Ok(HttpStatusCode.Created);
             }

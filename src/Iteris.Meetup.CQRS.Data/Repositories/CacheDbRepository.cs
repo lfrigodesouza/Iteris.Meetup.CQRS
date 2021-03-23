@@ -1,4 +1,4 @@
-﻿using Iteris.Meetup.Domain.Interfaces.Repositories;
+﻿using Iteris.Meetup.CQRS.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Iteris.Meetup.CQRS.Data.Repositories

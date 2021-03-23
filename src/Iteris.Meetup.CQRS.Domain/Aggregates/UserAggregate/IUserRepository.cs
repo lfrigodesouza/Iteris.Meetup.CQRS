@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Iteris.Meetup.Domain.Entities;
 
-namespace Iteris.Meetup.Domain.Interfaces.Repositories
+namespace Iteris.Meetup.CQRS.Domain.Aggregates.UserAggregate
 {
     public interface IUserRepository
     {
         Task<User> GetById(int userId);
+
         Task<int> Create(User user);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Command.Notifications;
-using Iteris.Meetup.Domain.Enums;
+using Iteris.Meetup.CQRS.Domain.Enums;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

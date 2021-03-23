@@ -1,14 +1,15 @@
-﻿using System.Net;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Iteris.Meetup.CQRS.Api.Controllers;
-using Iteris.Meetup.CQRS.Command.Commands;
-using Iteris.Meetup.CQRS.Query.Queries;
+using Iteris.Meetup.CQRS.Application;
+using Iteris.Meetup.CQRS.Application.Commands.CreateUser;
+using Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress;
+using Iteris.Meetup.CQRS.Application.Queries.UserAdresses;
 using Iteris.Meetup.CQRS.Test.Fakes;
-using Iteris.Meetup.Domain.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
+using System.Net;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Iteris.Meetup.CQRS.Test.Controllers
@@ -33,8 +34,8 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<CreateUserCommand>()).Returns(errorResponse);
 
             var response = await _controller.CreateUser(new CreateUserCommand()) as ObjectResult;
-            response.StatusCode.Value.Should().Be((int) statusCode);
-            response.Value.Should().BeEquivalentTo(new[] {$"Generic {statusCode.ToString()} Error message"});
+            response.StatusCode.Value.Should().Be((int)statusCode);
+            response.Value.Should().BeEquivalentTo(new[] { $"Generic {statusCode.ToString()} Error message" });
         }
 
         [Fact]
@@ -44,7 +45,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<CreateUserCommand>()).Returns(successResponse);
 
             var response = await _controller.CreateUser(new CreateUserCommand()) as ObjectResult;
-            response.StatusCode.Should().Be((int) HttpStatusCode.Created);
+            response.StatusCode.Should().Be((int)HttpStatusCode.Created);
             response.Value.Should().BeEquivalentTo(string.Empty);
         }
 
@@ -54,21 +55,21 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
         public async Task WhenCreateAddressHasError_ShouldReturnCorrectStatusCode(HttpStatusCode statusCode)
         {
             var errorResponse = Response.Fail(statusCode, $"Generic {statusCode.ToString()} Error message");
-            _mediator.Send(Arg.Any<CreateAddressCommand>()).Returns(errorResponse);
+            _mediator.Send(Arg.Any<CreateUserAddressCommand>()).Returns(errorResponse);
 
-            var response = await _controller.CreateAddress(new CreateAddressCommand()) as ObjectResult;
-            response.StatusCode.Value.Should().Be((int) statusCode);
-            response.Value.Should().BeEquivalentTo(new[] {$"Generic {statusCode.ToString()} Error message"});
+            var response = await _controller.CreateAddress(new CreateUserAddressCommand()) as ObjectResult;
+            response.StatusCode.Value.Should().Be((int)statusCode);
+            response.Value.Should().BeEquivalentTo(new[] { $"Generic {statusCode.ToString()} Error message" });
         }
 
         [Fact]
         public async Task WhenAddressCreated_ShouldReturnCreatedStatusCode()
         {
             var successResponse = Response.Ok(HttpStatusCode.Created);
-            _mediator.Send(Arg.Any<CreateAddressCommand>()).Returns(successResponse);
+            _mediator.Send(Arg.Any<CreateUserAddressCommand>()).Returns(successResponse);
 
-            var response = await _controller.CreateAddress(new CreateAddressCommand()) as ObjectResult;
-            response.StatusCode.Should().Be((int) HttpStatusCode.Created);
+            var response = await _controller.CreateAddress(new CreateUserAddressCommand()) as ObjectResult;
+            response.StatusCode.Should().Be((int)HttpStatusCode.Created);
             response.Value.Should().BeEquivalentTo(string.Empty);
         }
 
@@ -81,8 +82,8 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<UserAddressesQuery>()).Returns(errorResponse);
 
             var response = await _controller.GetAddresses(1) as ObjectResult;
-            response.StatusCode.Value.Should().Be((int) statusCode);
-            response.Value.Should().BeEquivalentTo(new[] {$"Generic {statusCode.ToString()} Error message"});
+            response.StatusCode.Value.Should().Be((int)statusCode);
+            response.Value.Should().BeEquivalentTo(new[] { $"Generic {statusCode.ToString()} Error message" });
         }
 
         [Fact]
@@ -93,7 +94,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<UserAddressesQuery>()).Returns(successResponse);
 
             var response = await _controller.GetAddresses(7) as ObjectResult;
-            response.StatusCode.Should().Be((int) HttpStatusCode.OK);
+            response.StatusCode.Should().Be((int)HttpStatusCode.OK);
             response.Value.Should().BeEquivalentTo(userAddresses);
         }
 
@@ -104,7 +105,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             _mediator.Send(Arg.Any<UserAddressesQuery>()).Returns(successResponse);
 
             var response = await _controller.GetAddresses(7) as ObjectResult;
-            response.StatusCode.Should().Be((int) HttpStatusCode.NoContent);
+            response.StatusCode.Should().Be((int)HttpStatusCode.NoContent);
             response.Value.Should().BeEquivalentTo(string.Empty);
         }
     }

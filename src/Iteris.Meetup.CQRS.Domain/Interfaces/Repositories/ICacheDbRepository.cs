@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Iteris.Meetup.Domain.Interfaces.Repositories
+namespace Iteris.Meetup.CQRS.Domain.Interfaces.Repositories
 {
     public interface ICacheDbRepository
     {

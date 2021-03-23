@@ -1,8 +1,7 @@
-﻿using System;
-using Iteris.Meetup.CQRS.Domain.Responses;
-using MediatR;
+﻿using MediatR;
+using System;
 
-namespace Iteris.Meetup.CQRS.Command.Commands
+namespace Iteris.Meetup.CQRS.Application.Commands.CreateUser
 {
     public class CreateUserCommand : IRequest<Response>
     {

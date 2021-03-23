@@ -1,5 +1,5 @@
 ﻿using System;
-using Iteris.Meetup.Domain.Enums;
+using Iteris.Meetup.CQRS.Domain.Enums;
 using MediatR;
 
 namespace Iteris.Meetup.CQRS.Command.Notifications

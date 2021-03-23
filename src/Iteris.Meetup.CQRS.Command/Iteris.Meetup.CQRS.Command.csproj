@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Iteris.Meetup.Domain\Iteris.Meetup.Domain.csproj" />
     <ProjectReference Include="..\Iteris.Meetup.CQRS.Data\Iteris.Meetup.CQRS.Data.csproj" />
   </ItemGroup>
 

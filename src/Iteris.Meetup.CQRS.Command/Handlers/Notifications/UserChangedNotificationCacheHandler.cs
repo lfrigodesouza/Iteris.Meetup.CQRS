@@ -2,8 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Iteris.Meetup.CQRS.Command.Notifications;
-using Iteris.Meetup.Domain.Entities;
-using Iteris.Meetup.Domain.Interfaces.Repositories;
+using Iteris.Meetup.CQRS.Domain.Entities;
+using Iteris.Meetup.CQRS.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 
-namespace Iteris.Meetup.Domain.Responses
+namespace Iteris.Meetup.CQRS.Application
 {
     public class Response
     {

@@ -2,7 +2,7 @@
 {
     public static class UserStatements
     {
-        public static string CreateUser => @"
+        public static readonly string CreateUser = @"
         INSERT
             INTO
             USER (NAME,
@@ -15,7 +15,7 @@
         @cpf);
         ";
 
-        public static string GetById => @"
+        public static readonly string GetById = @"
         SELECT
             ID as Id
             , NAME as Name

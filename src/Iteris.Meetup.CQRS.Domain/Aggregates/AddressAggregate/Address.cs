@@ -1,6 +1,8 @@
-﻿namespace Iteris.Meetup.Domain.Entities
+﻿using Iteris.Meetup.CQRS.Domain.SeedWorks;
+
+namespace Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate
 {
-    public class Address
+    public class Address : Entity
     {
         public Address() { }
 
@@ -21,6 +23,7 @@
             City = city;
             State = state;
             Name = name;
+            AddDomainEvent(new AddressCreatedEvent(this));
         }
 
         public string Name { get; set; }

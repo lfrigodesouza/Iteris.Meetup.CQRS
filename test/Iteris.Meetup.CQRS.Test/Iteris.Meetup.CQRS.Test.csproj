@@ -28,11 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Iteris.Meetup.Domain\Iteris.Meetup.Domain.csproj" />
     <ProjectReference Include="..\..\src\Iteris.Meetup.CQRS.Api\Iteris.Meetup.CQRS.Api.csproj" />
-    <ProjectReference Include="..\..\src\Iteris.Meetup.CQRS.Command\Iteris.Meetup.CQRS.Command.csproj" />
     <ProjectReference Include="..\..\src\Iteris.Meetup.CQRS.Data\Iteris.Meetup.CQRS.Data.csproj" />
-    <ProjectReference Include="..\..\src\Iteris.Meetup.CQRS.Query\Iteris.Meetup.CQRS.Query.csproj" />
   </ItemGroup>
 
 </Project>

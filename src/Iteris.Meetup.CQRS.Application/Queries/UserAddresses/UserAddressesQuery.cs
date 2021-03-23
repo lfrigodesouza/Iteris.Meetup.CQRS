@@ -1,7 +1,6 @@
-﻿using Iteris.Meetup.CQRS.Domain.Responses;
-using MediatR;
+﻿using MediatR;
 
-namespace Iteris.Meetup.CQRS.Query.Queries
+namespace Iteris.Meetup.CQRS.Application.Queries.UserAdresses
 {
     public class UserAddressesQuery : IRequest<Response>
     {

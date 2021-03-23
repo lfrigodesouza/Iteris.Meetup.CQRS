@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using FluentValidation;
+using Iteris.Meetup.CQRS.Application;
+using MediatR;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentValidation;
-using Iteris.Meetup.Domain.Responses;
-using MediatR;
 
 namespace Iteris.Meetup.CQRS.Api.Behaviors
 {
@@ -29,7 +29,7 @@ namespace Iteris.Meetup.CQRS.Api.Behaviors
                                       .ToList();
 
             if (failures.Any())
-                return (TResponse) Response.Fail(HttpStatusCode.BadRequest,
+                return (TResponse)Response.Fail(HttpStatusCode.BadRequest,
                     failures.Select(x => x.ErrorMessage).ToArray());
 
             return await next();

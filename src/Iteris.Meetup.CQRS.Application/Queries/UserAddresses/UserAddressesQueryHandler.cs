@@ -1,17 +1,15 @@
-﻿using System;
+﻿using Iteris.Meetup.CQRS.Application.Models;
+using Iteris.Meetup.CQRS.Domain.Interfaces.Repositories;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Iteris.Meetup.CQRS.Query.Queries;
-using Iteris.Meetup.CQRS.Domain.Entities;
-using Iteris.Meetup.CQRS.Domain.Interfaces.Repositories;
-using Iteris.Meetup.CQRS.Domain.Responses;
-using MediatR;
-using Microsoft.Extensions.Logging;
 
-namespace Iteris.Meetup.CQRS.Query.Handlers
+namespace Iteris.Meetup.CQRS.Application.Queries.UserAdresses
 {
     public class UserAddressesQueryHandler : IRequestHandler<UserAddressesQuery, Response>
     {
@@ -33,7 +31,7 @@ namespace Iteris.Meetup.CQRS.Query.Handlers
                 if (userAddresses == null || !userAddresses.Any())
                     return Response.Ok(HttpStatusCode.NoContent);
 
-                return Response.Ok(userAddresses);
+                return await Task.FromResult(Response.Ok(userAddresses));
             }
             catch (Exception ex)
             {

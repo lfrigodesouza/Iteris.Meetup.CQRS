@@ -1,9 +1,9 @@
-﻿using Iteris.Meetup.CQRS.Domain.Responses;
+﻿using Iteris.Meetup.CQRS.Application;
 using MediatR;
 
-namespace Iteris.Meetup.CQRS.Command.Commands
+namespace Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress
 {
-    public class CreateAddressCommand : IRequest<Response>
+    public class CreateUserAddressCommand : IRequest<Response>
     {
         public string Name { get; set; }
         public int UserId { get; set; }

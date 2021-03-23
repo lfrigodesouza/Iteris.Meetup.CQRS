@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Iteris.Meetup.Domain.Entities;
-using Iteris.Meetup.Domain.Responses;
+﻿using Iteris.Meetup.CQRS.Application.Models;
+using System.Collections.Generic;
 
 namespace Iteris.Meetup.CQRS.Test.Fakes
 {

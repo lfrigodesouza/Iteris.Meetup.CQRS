@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Dapper;
+using Iteris.Meetup.CQRS.Data.Statements;
+using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
-using Iteris.Meetup.CQRS.Data.Statements;
-using Iteris.Meetup.Domain.Entities;
-using Iteris.Meetup.Domain.Interfaces.Repositories;
 
 namespace Iteris.Meetup.CQRS.Data.Repositories
 {
@@ -36,7 +35,7 @@ namespace Iteris.Meetup.CQRS.Data.Repositories
             await using var conn = new SQLiteConnection(ConnString);
             conn.Open();
 
-            return await conn.QueryFirstOrDefaultAsync<Address>(AddressStatements.GetById, new {addressId});
+            return await conn.QueryFirstOrDefaultAsync<Address>(AddressStatements.GetById, new { addressId });
         }
 
         public async Task<List<Address>> GetByUserId(int userId)
