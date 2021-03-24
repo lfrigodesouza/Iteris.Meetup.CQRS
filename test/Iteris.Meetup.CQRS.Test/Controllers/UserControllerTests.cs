@@ -16,6 +16,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
 {
     public class UserControllerTests
     {
+        private const int USER_ID = 19;
         private readonly UserController _controller;
         private readonly IMediator _mediator;
 
@@ -57,7 +58,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             var errorResponse = Response.Fail(statusCode, $"Generic {statusCode.ToString()} Error message");
             _mediator.Send(Arg.Any<CreateUserAddressCommand>()).Returns(errorResponse);
 
-            var response = await _controller.CreateAddress(new CreateUserAddressCommand()) as ObjectResult;
+            var response = await _controller.CreateAddress(USER_ID, new CreateUserAddressCommand()) as ObjectResult;
             response.StatusCode.Value.Should().Be((int) statusCode);
             response.Value.Should().BeEquivalentTo(new[] {$"Generic {statusCode.ToString()} Error message"});
         }
@@ -68,7 +69,7 @@ namespace Iteris.Meetup.CQRS.Test.Controllers
             var successResponse = Response.Ok(HttpStatusCode.Created);
             _mediator.Send(Arg.Any<CreateUserAddressCommand>()).Returns(successResponse);
 
-            var response = await _controller.CreateAddress(new CreateUserAddressCommand()) as ObjectResult;
+            var response = await _controller.CreateAddress(USER_ID, new CreateUserAddressCommand()) as ObjectResult;
             response.StatusCode.Should().Be((int) HttpStatusCode.Created);
             response.Value.Should().BeEquivalentTo(string.Empty);
         }

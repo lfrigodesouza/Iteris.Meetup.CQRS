@@ -59,7 +59,6 @@
 
 {
   "name": "Casa",
-  "userId": 0,
   "streetName": "Rua Komakite Ikeda",
   "streetNumber": 1592,
   "cep": "18303260",
@@ -69,7 +68,6 @@
 
 {
   "name": "Loja",
-  "userId": 0,
   "streetName": "Rua Sebastião Elias de Carvalho",
   "streetNumber": 3,
   "complement": "Box 9",
@@ -80,7 +78,6 @@
 
 {
   "name": "Trabalho",
-  "userId": 0,
   "streetName": "Rua General Sidônio Dias Correia",
   "streetNumber": 1182,
   "complement": "3º Andar",
@@ -91,7 +88,6 @@
 
 {
   "name": "Casa",
-  "userId": 0,
   "streetName": "Rua Cezário José Gebara",
   "streetNumber": 1149,
   "cep": "13057545",
@@ -101,7 +97,6 @@
 
 {
   "name": "Trabalho",
-  "userId": 0,
   "streetName": "Avenida Continguiba",
   "streetNumber": 1236,
   "cep": "49052250",
