@@ -1,0 +1,106 @@
+----- Usuários
+{
+  "name": "Vitória",
+  "surname": "Barros Melo",
+  "birthday": "1990-01-14T23:05:59.932Z",
+  "cpf": "78146849865",
+  "addressName": "Casa",
+  "streetName": "Rua Doutor Ephigênio Barbosa da Silva",
+  "streetNumber": 214,
+  "cep": "58052310",
+  "city": "João Pessoa",
+  "state": "PB"
+}
+
+{
+  "name": "Nicolash",
+  "surname": "Oliveira Sousa",
+  "birthday": "1981-09-28T23:05:59.932Z",
+  "cpf": "23477276051",
+  "addressName": "Apto",
+  "streetName": "Rua Jacuípe",
+  "streetNumber": 1780,
+  "complement": "Bloco A - Apto 43",
+  "cep": "33125380",
+  "city": "Santa Luzia",
+  "state": "MG"
+}
+
+{
+  "name": "Pedro",
+  "surname": "Ribeiro Martins",
+  "birthday": "1938-04-22T23:05:59.932Z",
+  "cpf": "75374222651",
+  "addressName": "casa",
+  "streetName": "Rua Paraíba",
+  "streetNumber": 930,
+  "complement": "Casa 2",
+  "cep": "06852060",
+  "city": "Itapecerica da Serra",
+  "state": "SP"
+}
+
+{
+  "name": "Leonor",
+  "surname": "Melo Santos",
+  "birthday": "2001-11-17T23:05:59.932Z",
+  "cpf": "56138368177",
+  "addressName": "Casa",
+  "streetName": "Quadra QI 25",
+  "streetNumber": 1675,
+  "complement": "Apto 3",
+  "cep": "71060250",
+  "city": "Guará",
+  "state": "DF"
+}
+
+
+------ Endereços
+
+{
+  "name": "Casa",
+  "streetName": "Rua Komakite Ikeda",
+  "streetNumber": 1592,
+  "cep": "18303260",
+  "city": "Capão Bonito",
+  "state": "SP"
+}
+
+{
+  "name": "Loja",
+  "streetName": "Rua Sebastião Elias de Carvalho",
+  "streetNumber": 3,
+  "complement": "Box 9",
+  "cep": "08660210",
+  "city": "Suzano",
+  "state": "SP"
+}
+
+{
+  "name": "Trabalho",
+  "streetName": "Rua General Sidônio Dias Correia",
+  "streetNumber": 1182,
+  "complement": "3º Andar",
+  "cep": "22621070",
+  "city": "Rio de Janeiro",
+  "state": "RJ"
+}
+
+{
+  "name": "Casa",
+  "streetName": "Rua Cezário José Gebara",
+  "streetNumber": 1149,
+  "cep": "13057545",
+  "city": "Campinas",
+  "state": "SP"
+}
+
+{
+  "name": "Trabalho",
+  "streetName": "Avenida Continguiba",
+  "streetNumber": 1236,
+  "cep": "49052250",
+  "city": "Aracaju",
+  "state": "SE"
+}
+

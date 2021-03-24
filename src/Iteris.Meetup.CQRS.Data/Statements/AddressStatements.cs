@@ -2,7 +2,7 @@
 {
     public static class AddressStatements
     {
-        public static string CreateAddress = @"
+        public static readonly string CreateAddress = @"
             INSERT
                 INTO
                 ADDRESS (USERID,
@@ -23,7 +23,7 @@
             @name); ";
 
 
-        public static string GetById = @"
+        public static readonly string GetById = @"
             SELECT
                 ID as Id,
                 USERID as UserId,
@@ -38,7 +38,7 @@
                 ADDRESS
             WHERE ID = @addressId ";
 
-        public static string GetByUserId = @"
+        public static readonly string GetByUserId = @"
             SELECT
                 ID as Id,
                 USERID as UserId,

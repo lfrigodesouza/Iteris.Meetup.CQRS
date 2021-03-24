@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Iteris.Meetup.CQRS.Command.Commands;
-using Iteris.Meetup.CQRS.Query.Queries;
-using Iteris.Meetup.Domain.Entities;
+using Iteris.Meetup.CQRS.Application.Commands.CreateUser;
+using Iteris.Meetup.CQRS.Application.Commands.CreateUserAddress;
+using Iteris.Meetup.CQRS.Application.Models;
+using Iteris.Meetup.CQRS.Application.Queries.UserAdresses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Iteris.Meetup.CQRS.Api.Controllers
 {
     [ApiController]
-    [Route("/")]
+    [Route("/users")]
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -20,7 +21,7 @@ namespace Iteris.Meetup.CQRS.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("user")]
+        [HttpPost("")]
         [ProducesResponseType(typeof(int), (int) HttpStatusCode.Created)]
         [ProducesResponseType(typeof(List<string>), (int) HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(List<string>), (int) HttpStatusCode.BadRequest)]
@@ -30,17 +31,18 @@ namespace Iteris.Meetup.CQRS.Api.Controllers
             return StatusCode(response.StatusCode, response.GetResponse);
         }
 
-        [HttpPost("address")]
+        [HttpPost("{userId}/address")]
         [ProducesResponseType(typeof(void), (int) HttpStatusCode.Created)]
         [ProducesResponseType(typeof(List<string>), (int) HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(List<string>), (int) HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> CreateAddress([FromBody] CreateAddressCommand createAddressCommand)
+        public async Task<IActionResult> CreateAddress([FromRoute] int userId,[FromBody] CreateUserAddressCommand createAddressCommand)
         {
+            createAddressCommand.UserId = userId;
             var response = await _mediator.Send(createAddressCommand);
             return StatusCode(response.StatusCode, response.GetResponse);
         }
 
-        [HttpGet("address/{userId}")]
+        [HttpGet("{userId}/addresses")]
         [ProducesResponseType(typeof(List<UserAddress>), (int) HttpStatusCode.OK)]
         [ProducesResponseType(typeof(void), (int) HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(List<string>), (int) HttpStatusCode.InternalServerError)]

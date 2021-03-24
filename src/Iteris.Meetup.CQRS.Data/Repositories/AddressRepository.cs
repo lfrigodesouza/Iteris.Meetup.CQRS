@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Iteris.Meetup.CQRS.Data.Statements;
-using Iteris.Meetup.Domain.Entities;
-using Iteris.Meetup.Domain.Interfaces.Repositories;
+using Iteris.Meetup.CQRS.Domain.Aggregates.AddressAggregate;
 
 namespace Iteris.Meetup.CQRS.Data.Repositories
 {
