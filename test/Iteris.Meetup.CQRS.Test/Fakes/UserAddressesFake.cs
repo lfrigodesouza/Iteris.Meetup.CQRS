@@ -11,7 +11,7 @@ namespace Iteris.Meetup.CQRS.Test.Fakes
             response.AddRange(
                 new List<UserAddress>
                 {
-                    new ()
+                    new()
                     {
                         Cep = "35182380",
                         City = "Timóteo",
@@ -19,7 +19,7 @@ namespace Iteris.Meetup.CQRS.Test.Fakes
                         State = "MG",
                         Street = "Rua Um, 232"
                     },
-                    new ()
+                    new()
                     {
                         Name = "Trabalho",
                         Street = "Rua Roberto Cruz, 1858, sala 3",

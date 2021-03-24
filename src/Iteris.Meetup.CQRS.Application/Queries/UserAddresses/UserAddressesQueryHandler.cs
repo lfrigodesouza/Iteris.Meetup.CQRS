@@ -14,9 +14,9 @@ namespace Iteris.Meetup.CQRS.Application.Queries.UserAdresses
     public class UserAddressesQueryHandler : IRequestHandler<UserAddressesQuery, Response>
     {
         private readonly ICacheDbRepository _cacheDbRepository;
-        private readonly ILogger<UserAddressesQuery> _logger;
+        private readonly ILogger<UserAddressesQueryHandler> _logger;
 
-        public UserAddressesQueryHandler(ILogger<UserAddressesQuery> logger,
+        public UserAddressesQueryHandler(ILogger<UserAddressesQueryHandler> logger,
             ICacheDbRepository cacheDbRepository)
         {
             _logger = logger;

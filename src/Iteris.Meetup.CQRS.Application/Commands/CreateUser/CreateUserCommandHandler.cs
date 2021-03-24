@@ -13,11 +13,11 @@ namespace Iteris.Meetup.CQRS.Application.Commands.CreateUser
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Response>
     {
         private readonly IAddressRepository _addressRepository;
-        private readonly ILogger<CreateUserCommand> _logger;
+        private readonly ILogger<CreateUserCommandHandler> _logger;
         private readonly IMediator _mediator;
         private readonly IUserRepository _userRepository;
 
-        public CreateUserCommandHandler(ILogger<CreateUserCommand> logger,
+        public CreateUserCommandHandler(ILogger<CreateUserCommandHandler> logger,
             IUserRepository userRepository,
             IAddressRepository addressRepository,
             IMediator mediator)
